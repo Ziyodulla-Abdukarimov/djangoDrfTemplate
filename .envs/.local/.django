@@ -1,0 +1,5 @@
+SECRET_KEY=django-insecure-cht(!h&46_cc#%++brbdm4%=^w_1p61&i$pk$h52q&5y-0+qo_
+DJANGO_SETTINGS_MODULE=config.settings.local
+DB_NAME=ProjectName
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432

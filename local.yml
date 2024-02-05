@@ -1,0 +1,34 @@
+version: '3.8'
+
+volumes:
+  postgres_data:
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: dockerfiles/local/django-dockerfile
+    volumes:
+      - .:/ProjectName:cached #change this your project name
+    container_name: ProjectName-django # change this your project name
+    ports:
+      - 8001:8000
+    depends_on:
+      - postgres
+    env_file:
+      - .envs/.postgres
+      - .envs/.local/.django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: dockerfiles/db-dockerfile
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    container_name: Project-db # change this your project name
+    hostname: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - .envs/.postgres
+

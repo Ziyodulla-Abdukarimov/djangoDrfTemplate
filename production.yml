@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: dockerfiles/production/django-dockerfile
+    container_name: ProjectName-django # change this your project name
+    ports:
+      - 8000:8000
+    depends_on:
+      - postgres
+    env_file:
+      - .envs/.postgres
+      - .envs/.production/.django
+
+  postgres:
+    build:
+      context: .
+      dockerfile: dockerfiles/db-dockerfile
+    container_name: ProjectName-db # change this your project name
+    hostname: postgres
+    ports:
+      - 5432:5432
+    env_file:
+      - .envs/.postgres
